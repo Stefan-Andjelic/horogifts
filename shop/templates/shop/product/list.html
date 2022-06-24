@@ -20,18 +20,42 @@
         </ul>
     </div>
 
+    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
     <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
-
-        {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                <br>
-                ${{ product.price }}
-            </div>
-        {% endfor %}
+        <div class="row">
+            
+            {% for product in products %}
+                {% comment %} <div class="item">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                    </a>
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                    <br>
+                    ${{ product.price }}
+                </div> {% endcomment %}
+                <div class="col-4 mt-3">
+                    <div class="card h-100" style="width: 18rem;">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ product.name }}</h5>
+                          <p class="card-text">{{ product.description }}</p>
+                          <p class="card-text">{{ product.price }}</p>
+                          {% comment %} ${{ product.price }} {% endcomment %}
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} <div class="card-deck">
+                    <div class="card h-100">
+                      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      </div>
+                    </div>
+                </div> {% endcomment %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}

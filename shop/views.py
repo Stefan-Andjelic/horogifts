@@ -11,7 +11,7 @@ def product_list(request, category_slug=None):
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=category)
+        products = Product.objects.filter(category=category, available=True)
 
     return render(request, 'shop/product/list.html', {'category': category, 
                                                       'categories': categories, 
